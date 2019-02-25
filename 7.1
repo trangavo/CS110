@@ -1,0 +1,33 @@
+def partition(A,start,end):
+    pivot = end
+    i = start-1
+    for j in range(start, end):
+        if A[j] <= A[pivot]:
+            i += 1
+            A[i], A[j] = A[j], A[i]
+    A[i+1], A[pivot] = A[pivot], A[i+1]
+    return (i+1)
+def qselect(A,start,end,k):
+    if start >= end:
+        return A[end]
+    else:
+        p = partition(A,start,end)
+        print(A)
+        if p == k-1:
+            return A[p]
+            print(A[p])
+        elif p < k-1:
+            i = p - 1
+            print(A[i+2:end])
+            qselect(A,i+2,end,k)          
+        elif p > k-1:
+            i = p - 1
+            print(A[start:i])
+            qselect(A,start,i,k)
+
+import random
+random.seed(123)
+lst = [e for e in range(10)]
+random.shuffle(lst)
+print(lst)
+print(qselect(lst,0,len(lst)-1, 3))
